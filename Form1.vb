@@ -166,4 +166,13 @@ Public Class Form1
             End If
         End If
     End Sub
+
+    Private Sub btnTutup_Click(sender As Object, e As EventArgs) Handles btnTutup.Click
+        If btnTutup.Text = "TUTUP" Then
+            End
+            ' namun kalau tulisannya BATAL maka kita panggil KondisiAwal()
+        Else
+            Call KondisiAwal()
+        End If
+    End Sub
 End Class
