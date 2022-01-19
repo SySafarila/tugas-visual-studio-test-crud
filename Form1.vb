@@ -146,10 +146,13 @@ Public Class Form1
             btnTutup.Text = "BATAL"
             ' setelah itu kita aktifkan FieldAktif() yang mana artinya kita mengaktifkan textbox1, textbox2, textbox3 dan textbox4
             Call FieldAktif()
+            tbNama.Enabled = False
+            tbAlamat.Enabled = False
+            tbJurusan.Enabled = False
         Else
             ' Ini adalah validasi
             ' jika field tidak terisi maka tidak akan bisa di hapus
-            If tbNim.Text = "" Or tbNama.Text = "" Or tbAlamat.Text = "" Or tbJurusan.Text = "" Then
+            If tbNim.Text = "" Then
                 MsgBox("Pastikan data yang akan dihapus terisi")
             Else
                 ' jika sudah kita isi fieldnya maka bisa kita hapus, prosesnya adalah
