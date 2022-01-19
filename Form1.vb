@@ -134,4 +134,36 @@ Public Class Form1
             End If
         End If
     End Sub
+
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+        If btnHapus.Text = "HAPUS" Then
+            btnHapus.Text = "DELETE"
+            ' button1 non aktifkan
+            btnSimpan.Enabled = False
+            ' button2 juga kita non aktifkan, jadi dia ga bisa di klik sama sekali ketika button hapus kita klik
+            btnEdit.Enabled = False
+            ' button4.text kita ubah textnya dari tutup menjadi batal
+            btnTutup.Text = "BATAL"
+            ' setelah itu kita aktifkan FieldAktif() yang mana artinya kita mengaktifkan textbox1, textbox2, textbox3 dan textbox4
+            Call FieldAktif()
+        Else
+            ' Ini adalah validasi
+            ' jika field tidak terisi maka tidak akan bisa di hapus
+            If tbNim.Text = "" Or tbNama.Text = "" Or tbAlamat.Text = "" Or tbJurusan.Text = "" Then
+                MsgBox("Pastikan data yang akan dihapus terisi")
+            Else
+                ' jika sudah kita isi fieldnya maka bisa kita hapus, prosesnya adalah
+                ' kita panggil Koneksi()
+                Call Koneksi()
+                ' lalu kita panggil table mahasiswa lalu dia bilang "tolongin aku dong, aku mau hapus dengan nim xxx tolong di bantu ya. makasih:)"
+                Dim HapusData As String = "delete from mahasiswa where nim='" & tbNim.Text & "'"
+                Cmd = New OdbcCommand(HapusData, Conn)
+                Cmd.ExecuteNonQuery()
+                ' kalau berhasil kita tampilkan alert / message dengan tulisan "hapus data berhasil"
+                MsgBox("Hapus data berhasil")
+                ' lalu kita panggil kondisiAwal()
+                Call KondisiAwal()
+            End If
+        End If
+    End Sub
 End Class
