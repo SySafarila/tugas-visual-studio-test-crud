@@ -56,4 +56,30 @@ Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Call KondisiAwal()
     End Sub
+
+    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+        If btnSimpan.Text = "INPUT" Then
+            btnSimpan.Text = "SIMPAN"
+
+            btnEdit.Enabled = False
+            btnHapus.Enabled = False
+            btnTutup.Text = "BATAL"
+
+            Call FieldAktif()
+        Else
+            If tbNim.Text = "" Or tbNama.Text = "" Or tbAlamat.Text = "" Or tbJurusan.Text = "" Then
+                MsgBox("Pastikan semua field terisi")
+            Else
+                Call Koneksi()
+
+                Dim InputData As String = "Insert into mahasiswa values('" & tbNim.Text & "','" & tbNama.Text & "','" & tbAlamat.Text & "','" & tbJurusan.Text & "')"
+                Cmd = New OdbcCommand(InputData, Conn)
+                Cmd.ExecuteNonQuery()
+
+                MsgBox("Input data berhasil")
+
+                Call KondisiAwal()
+            End If
+        End If
+    End Sub
 End Class
